@@ -19,7 +19,7 @@ class RNN():
         self._keep_prob = 1.0
         self._num_epoch = num_epoch
 
-    def build_model(self, X_train, Y_train, X_val, Y_val, min_data, max_data):
+    def build_model(self, X_train, Y_train, X_test, Y_test, min_data, max_data):
         # build graph
         tf.reset_default_graph()
         lstm_graph = tf.Graph()
@@ -64,8 +64,8 @@ class RNN():
                 loss_trains.append(total_loss_train / X_train.shape[0])
 
                 vali_data_feed = {
-                    inputs: X_val,
-                    targets: Y_val
+                    inputs: X_test,
+                    targets: Y_test
                 }
                 loss_vali, = sess.run([loss], vali_data_feed)
                 loss_tests.append(loss_vali)
